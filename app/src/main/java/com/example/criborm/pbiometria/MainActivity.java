@@ -180,18 +180,24 @@ public class MainActivity extends AppCompatActivity {
             this.laMedida.setText("pulsado");
             // Hay que crear uno nuevo cada vez
             PeticionarioREST elPeticionario = new PeticionarioREST();
-            String cuerpecito = "{\"ozono\":\"" + major + "\"," + "\"temperatura\":\"" + minor + "\"," + "\"geopunto\":\"" + Double.toString(localizacion.getLatitude()) +","+ Double.toString(localizacion.getLongitude()) + "\"}";
+            try {
+                String cuerpecito = "{\"ozono\":\"" + major + "\"," + "\"temperatura\":\"" + minor + "\"," + "\"geopunto\":\"" + Double.toString(localizacion.getLatitude()) +","+ Double.toString(localizacion.getLongitude()) + "\"}";
+                elPeticionario.hacerPeticionREST("POST", "http://192.168.1.102:1234/insertarMedicion", cuerpecito ,
+                        new PeticionarioREST.RespuestaREST() {
+                            @Override
+                            public void callback(int codigo, String cuerpo) {
 
-            elPeticionario.hacerPeticionREST("POST", "http://192.168.1.102:1234/insertarMedicion", cuerpecito ,
-                    new PeticionarioREST.RespuestaREST() {
-                        @Override
-                        public void callback(int codigo, String cuerpo) {
 
 
-
+                            }
                         }
-                    }
-            );
+                );
+            } catch (Exception e) {
+                // Bloque catch para manejar excepciones generales
+                System.err.println("Se produjo una excepción: " + e.getMessage());
+            }
+
+
         }
 
 
@@ -429,7 +435,7 @@ public class MainActivity extends AppCompatActivity {
         //this.buscarEsteDispositivoBTLE( Utilidades.stringToUUID( "EPSG-GTI-PROY-3A" ) );
 
         //this.buscarEsteDispositivoBTLE( "EPSG-GTI-PROY-3A" );
-        this.buscarEsteDispositivoBTLE("BLE Device");
+        this.buscarEsteDispositivoBTLE("GTI-3A-CRISTIAN");
 
     } // ()
 
