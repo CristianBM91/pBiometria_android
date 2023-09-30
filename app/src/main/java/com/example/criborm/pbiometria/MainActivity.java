@@ -153,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
 
                             laMedida.setText(jobj.get("valorOzono").toString());
 
+                            laTemperatura.setText(jobj.get("valorTemp").toString() + "ºC");
+
                             ProgressBar progress = findViewById(R.id.progressBar);
                             progress.setProgress(Integer.parseInt(jobj.get("valorOzono").toString()));
                             if(Integer.parseInt(jobj.get("valorOzono").toString()) < 249){
