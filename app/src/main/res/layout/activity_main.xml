@@ -78,7 +78,7 @@
         android:id="@+id/botonEnviar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="boton_enviar_pulsado"
+        android:onClick="boton_recibir_pulsado"
         android:text="Recibir"
         app:layout_constraintBottom_toBottomOf="@+id/botonRecibir"
         app:layout_constraintStart_toStartOf="@+id/botonDetenerBusquedaDispositivosBTLE"
@@ -89,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:onClick="boton_recibir_pulsado"
+        android:onClick="boton_enviar_pulsado"
         android:text="Enviar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/botonDetenerBusquedaDispositivosBTLE" />

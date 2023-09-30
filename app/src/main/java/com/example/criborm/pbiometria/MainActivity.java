@@ -50,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     private Location localizacion;
     private TextView laLocaliz;
     private TextView laTemperatura;
+
+    private int major;
+    private int minor;
     // -------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------
     private static final String ETIQUETA_LOG = ">>>>";
@@ -108,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     //----------------------------------------------------------------------------------------------
     // API REST
     //----------------------------------------------------------------------------------------------
-    public void boton_enviar_pulsado(View quien) {
+    public void boton_recibir_pulsado(View quien) {
         Log.d("clienterestandroid", "boton_enviar_pulsado");
         this.laMedida.setText("pulsado");
 
@@ -170,12 +173,12 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
     }
-        public void boton_recibir_pulsado (View quien) {
+        public void boton_enviar_pulsado (View quien) {
             Log.d("clienterestandroid", "boton_enviar_pulsado");
             this.laMedida.setText("pulsado");
             // Hay que crear uno nuevo cada vez
             PeticionarioREST elPeticionario = new PeticionarioREST();
-            String cuerpecito = "{\"ozono\":\"" + "300" + "\"," + "\"geopunto\":\"" + Double.toString(localizacion.getLatitude()) +","+ Double.toString(localizacion.getLongitude()) + "\"}";
+            String cuerpecito = "{\"ozono\":\"" + major + "\"," + "\"temperatura\":\"" + minor + "\"," + "\"geopunto\":\"" + Double.toString(localizacion.getLatitude()) +","+ Double.toString(localizacion.getLongitude()) + "\"}";
 
             elPeticionario.hacerPeticionREST("POST", "http://192.168.1.102:1234/insertarMedicion", cuerpecito ,
                     new PeticionarioREST.RespuestaREST() {
@@ -321,11 +324,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d(ETIQUETA_LOG, " ****************************************************");
 
 
-        textMajor.setText( " major  = " + "( "
-                + Utilidades.bytesToInt(tib.getMajor()) + " ) ");
+        major = Utilidades.bytesToInt(tib.getMajor());
 
-        textMinor.setText( " minor  = " + "( "
-                + Utilidades.bytesToInt(tib.getMinor()) + " ) ");
+        minor = Utilidades.bytesToInt(tib.getMinor());
     } // ()
 
     // --------------------------------------------------------------
